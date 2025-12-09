@@ -7,11 +7,21 @@ import plotly.figure_factory as ff
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/raw/amazon_sales_2025_INR.csv")
+    df = pd.read_csv("data/processed/diwali_sales_clean.csv")
     df["Date"] = pd.to_datetime(df["Date"])
     df["Month"] = df["Date"].dt.month
     df["Month_Name"] = df["Date"].dt.strftime("%b")
     df["Quarter"] = df["Date"].dt.quarter
+    cat_cols = [
+        "Product_Category",
+        "Product_Name",
+        "Payment_Method",
+        "Delivery_Status",
+        "State",
+        "Country"
+    ]
+    for col in cat_cols:
+        df[col] = df[col].astype("category")
     df["Delivered_Flag"] = (df["Delivery_Status"] == "Delivered").astype(int)
     df["Satisfied"] = (df["Review_Rating"] >= 4).astype(int)
     df["Log_Total_Sales"] = np.log(df["Total_Sales_INR"] + 1)
@@ -50,6 +60,13 @@ col2.metric("Avg Rating", f"{filtered['Review_Rating'].mean():.2f}")
 col3.metric("Delivery Success Rate", f"{filtered['Delivered_Flag'].mean()*100:.1f}%")
 
 st.markdown("---")
+
+st.header("Raw Data Table")
+st.write("Below is a preview of the top 10 rows of the raw dataset.")
+st.dataframe(df.head(10))  # Display top 10 rows
+
+st.markdown("---")
+
 
 # RQ1: Sales by Product Category
 st.header("RQ1: Sales by Product Category")
