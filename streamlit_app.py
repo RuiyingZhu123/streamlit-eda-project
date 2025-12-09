@@ -44,8 +44,20 @@ filtered = df[
 st.title("Amazon Diwali Sales 2025 Dashboard")
 st.write("A complete analytics dashboard including sales trends, ratings, payments, correlations, forecasting, and anomaly detection.")
 
+def format_large(n):
+    if n >= 1_000_000_000:
+        return f"{n/1_000_000_000:.2f} B"
+    elif n >= 1_000_000:
+        return f"{n/1_000_000:.2f} M"
+    elif n >= 1_000:
+        return f"{n/1_000:.2f} K"
+    else:
+        return f"{n:,}"
+
 col1, col2, col3 = st.columns(3)
-col1.metric("Total Revenue (INR)", f"{filtered['Total_Sales_INR'].sum():,}")
+
+total_rev = filtered['Total_Sales_INR'].sum()
+col1.metric("Total Revenue (INR)", format_large(total_rev))
 col2.metric("Avg Rating", f"{filtered['Review_Rating'].mean():.2f}")
 col3.metric("Delivery Success Rate", f"{filtered['Delivered_Flag'].mean()*100:.1f}%")
 
