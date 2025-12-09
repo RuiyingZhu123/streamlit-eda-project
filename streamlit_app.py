@@ -192,7 +192,7 @@ st.plotly_chart(fig_corr, use_container_width=True)
 
 st.markdown("---")
 
-# Scatter Matrix (Pairwise Comparison)
+# Scatter Matrix
 st.header("Scatter Matrix with Trend Lines")
 
 pairs = [
