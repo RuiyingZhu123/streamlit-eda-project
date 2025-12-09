@@ -1,4 +1,4 @@
-# Project Title - Exploratory Data Analysis (EDA) and Data Cleaning
+# Exploratory Data Analysis (EDA) and Data Cleaning
 
 ## Project Overview
 This project performs **Exploratory Data Analysis (EDA)** and **Data Cleaning** on [Amazon Sales 2025 Dataset](./data/raw/amazon_sales_2025_INR.csv) to gain insights and prepare the data for further analysis or modeling. The tasks completed include:
